@@ -1,7 +1,7 @@
 package validators
 
 import (
-	"github.com/ralugr/filter-service/pkg/model"
+	"github.com/ralugr/filter-service/internal/model"
 )
 
 type Base interface {

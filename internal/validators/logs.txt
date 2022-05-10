@@ -1,0 +1,243 @@
+INFO: 2022/05/09 14:53:27 imagevalidator.go:15: Creating link validator
+INFO: 2022/05/09 14:58:40 imagevalidator.go:15: Creating link validator
+INFO: 2022/05/09 14:59:21 imagevalidator.go:15: Creating link validator
+INFO: 2022/05/09 14:59:30 imagevalidator.go:15: Creating link validator
+INFO: 2022/05/09 15:00:44 imagevalidator.go:15: Creating link validator
+INFO: 2022/05/09 15:01:38 imagevalidator.go:15: Creating link validator
+INFO: 2022/05/09 15:16:32 imagevalidator.go:15: Creating link validator
+INFO: 2022/05/09 16:39:50 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 16:41:23 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 16:44:57 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 17:06:54 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 17:06:54 imagevalidator.go:25: Entering image validator with message  Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> ![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> ![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->Some basic text![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid}
+INFO: 2022/05/09 17:06:54 imagevalidator.go:25: Entering image validator with message  Message { UID: 3456, Body: Just a message without any images. Just a message without any images. Just a message without any images., State: Invalid}
+INFO: 2022/05/09 17:06:54 imagevalidator.go:29: The message Message { UID: 3456, Body: Just a message without any images. Just a message without any images. Just a message without any images., State: Accepted} has no images, exiting ImageValidator 
+INFO: 2022/05/09 17:06:54 imagevalidator.go:25: Entering image validator with message  Message { UID: 4567, Body: ![First image (tea)](path/to/image.png "Text-to-show-on-mouseover"), State: Invalid}
+INFO: 2022/05/09 17:06:54 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: ![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid}
+INFO: 2022/05/09 17:06:54 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: ![]() <!--state: Rejected   -->, State: Invalid}
+INFO: 2022/05/09 17:06:54 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: !(path/to/image) <!--state: queued   -->, State: Invalid}
+INFO: 2022/05/09 17:06:54 imagevalidator.go:29: The message Message { UID: 5678, Body: !(path/to/image) <!--state: queued   -->, State: Accepted} has no images, exiting ImageValidator 
+INFO: 2022/05/09 17:07:51 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 17:07:51 imagevalidator.go:25: Entering image validator with message  Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> ![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> ![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->Some basic text![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid}
+INFO: 2022/05/09 17:07:51 imagevalidator.go:25: Entering image validator with message  Message { UID: 3456, Body: Just a message without any images. Just a message without any images. Just a message without any images., State: Invalid}
+INFO: 2022/05/09 17:07:51 imagevalidator.go:29: The message Message { UID: 3456, Body: Just a message without any images. Just a message without any images. Just a message without any images., State: Accepted} has no images, exiting ImageValidator 
+INFO: 2022/05/09 17:07:51 imagevalidator.go:25: Entering image validator with message  Message { UID: 4567, Body: ![First image (tea)](path/to/image.png "Text-to-show-on-mouseover"), State: Invalid}
+INFO: 2022/05/09 17:07:51 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: ![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid}
+INFO: 2022/05/09 17:07:51 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: ![]() <!--state: Rejected   -->, State: Invalid}
+INFO: 2022/05/09 17:07:51 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: !(path/to/image) <!--state: queued   -->, State: Invalid}
+INFO: 2022/05/09 17:07:51 imagevalidator.go:29: The message Message { UID: 5678, Body: !(path/to/image) <!--state: queued   -->, State: Accepted} has no images, exiting ImageValidator 
+INFO: 2022/05/09 18:26:59 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 18:26:59 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 18:37:54 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 18:37:54 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 18:41:58 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 18:41:58 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 18:43:46 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 18:43:46 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 18:46:18 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 18:46:18 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 18:47:17 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 18:47:17 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 19:04:19 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 19:04:19 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 19:04:19 imagevalidator.go:25: Entering image validator with message  Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid}
+INFO: 2022/05/09 19:04:19 imagevalidator.go:25: Entering image validator with message  Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images., State: Invalid}
+INFO: 2022/05/09 19:04:19 imagevalidator.go:29: The message Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images., State: Accepted} has no images, exiting ImageValidator 
+INFO: 2022/05/09 19:04:19 imagevalidator.go:25: Entering image validator with message  Message { UID: 4567, Body: # Starts with heading 1
+![First image (tea)](path/to/image.png "Text-to-show-on-mouseover"), State: Invalid}
+INFO: 2022/05/09 19:04:19 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: #### Starts with heading 4 
+![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid}
+INFO: 2022/05/09 19:04:19 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: Starts with a paragraph
+![]() <!--state: Rejected   -->
+# Contains heading1, State: Invalid}
+INFO: 2022/05/09 19:04:19 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->, State: Invalid}
+INFO: 2022/05/09 19:04:19 imagevalidator.go:29: The message Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->, State: Accepted} has no images, exiting ImageValidator 
+INFO: 2022/05/09 19:05:16 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 19:05:16 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 19:05:16 imagevalidator.go:25: Entering image validator with message  Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid}
+INFO: 2022/05/09 19:05:16 imagevalidator.go:25: Entering image validator with message  Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images., State: Invalid}
+INFO: 2022/05/09 19:05:16 imagevalidator.go:29: The message Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images., State: Accepted} has no images, exiting ImageValidator 
+INFO: 2022/05/09 19:05:16 imagevalidator.go:25: Entering image validator with message  Message { UID: 4567, Body: # Starts with heading 1
+![First image (tea)](path/to/image.png "Text-to-show-on-mouseover"), State: Invalid}
+INFO: 2022/05/09 19:05:16 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: #### Starts with heading 4 
+![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid}
+INFO: 2022/05/09 19:05:16 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: Starts with a paragraph
+![]() <!--state: Rejected   -->
+# Contains heading1, State: Invalid}
+INFO: 2022/05/09 19:05:16 imagevalidator.go:25: Entering image validator with message  Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->, State: Invalid}
+INFO: 2022/05/09 19:05:16 imagevalidator.go:29: The message Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->, State: Accepted} has no images, exiting ImageValidator 
+INFO: 2022/05/09 19:07:25 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 19:07:25 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 19:07:25 textvalidator.go:21: Entering text validator with message  Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid}
+WARNING: 2022/05/09 19:07:25 textvalidator.go:43: The message Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid} does not start with a heading 1
+INFO: 2022/05/09 19:07:25 textvalidator.go:31: Message Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Rejected} rejected by Text Validator 
+INFO: 2022/05/09 19:07:25 textvalidator.go:21: Entering text validator with message  Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images., State: Invalid}
+INFO: 2022/05/09 19:07:25 textvalidator.go:25: Message Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images., State: Accepted} accepted by Text Validator 
+INFO: 2022/05/09 19:07:25 textvalidator.go:21: Entering text validator with message  Message { UID: 4567, Body: # Starts with heading 1
+![First image (tea)](path/to/image.png "Text-to-show-on-mouseover"), State: Invalid}
+WARNING: 2022/05/09 19:07:25 textvalidator.go:58: The message Message { UID: 4567, Body: # Starts with heading 1
+![First image (tea)](path/to/image.png "Text-to-show-on-mouseover"), State: Invalid} does contain a paragraph
+INFO: 2022/05/09 19:07:25 textvalidator.go:31: Message Message { UID: 4567, Body: # Starts with heading 1
+![First image (tea)](path/to/image.png "Text-to-show-on-mouseover"), State: Rejected} rejected by Text Validator 
+INFO: 2022/05/09 19:07:25 textvalidator.go:21: Entering text validator with message  Message { UID: 5678, Body: #### Starts with heading 4 
+![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid}
+WARNING: 2022/05/09 19:07:25 textvalidator.go:43: The message Message { UID: 5678, Body: #### Starts with heading 4 
+![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid} does not start with a heading 1
+INFO: 2022/05/09 19:07:25 textvalidator.go:31: Message Message { UID: 5678, Body: #### Starts with heading 4 
+![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Rejected} rejected by Text Validator 
+INFO: 2022/05/09 19:07:25 textvalidator.go:21: Entering text validator with message  Message { UID: 5678, Body: Starts with a paragraph
+![]() <!--state: Rejected   -->
+# Contains heading1, State: Invalid}
+WARNING: 2022/05/09 19:07:25 textvalidator.go:43: The message Message { UID: 5678, Body: Starts with a paragraph
+![]() <!--state: Rejected   -->
+# Contains heading1, State: Invalid} does not start with a heading 1
+INFO: 2022/05/09 19:07:25 textvalidator.go:31: Message Message { UID: 5678, Body: Starts with a paragraph
+![]() <!--state: Rejected   -->
+# Contains heading1, State: Rejected} rejected by Text Validator 
+INFO: 2022/05/09 19:07:25 textvalidator.go:21: Entering text validator with message  Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->, State: Invalid}
+INFO: 2022/05/09 19:07:25 textvalidator.go:25: Message Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->, State: Accepted} accepted by Text Validator 
+INFO: 2022/05/09 19:57:28 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 19:57:28 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/09 19:57:28 textvalidator.go:16: Creating text validator
+WARNING: 2022/05/09 19:57:28 linkvalidator.go:35: The message Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid} has an external link <nil>
+WARNING: 2022/05/09 19:57:28 linkvalidator.go:35: The message Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images.[Google link] ("http://google.com/"), State: Invalid} has an external link <nil>
+WARNING: 2022/05/09 19:57:28 linkvalidator.go:35: The message Message { UID: 4567, Body: # Starts with heading 1
+![First image (tea)](path/to/image.png "Text-to-show-on-mouseover")[Internal link] ("/internal/path"), State: Invalid} has an external link <nil>
+WARNING: 2022/05/09 19:57:28 linkvalidator.go:35: The message Message { UID: 5678, Body: #### Starts with heading 4 
+![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid} has an external link <nil>
+WARNING: 2022/05/09 19:57:28 linkvalidator.go:35: The message Message { UID: 5678, Body: Starts with a paragraph
+![]() <!--state: Rejected   -->
+# Contains heading1, State: Invalid} has an external link <nil>
+WARNING: 2022/05/09 19:57:28 linkvalidator.go:35: The message Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->[Google invalid link] ("google.com/"), State: Invalid} has an external link <nil>
+INFO: 2022/05/09 19:58:18 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 19:58:18 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/09 19:58:18 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 19:59:41 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 19:59:41 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/09 19:59:41 textvalidator.go:16: Creating text validator
+INFO: 2022/05/09 20:02:22 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 20:02:22 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/09 20:02:22 textvalidator.go:16: Creating text validator
+WARNING: 2022/05/09 20:02:22 linkvalidator.go:35: The message Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid} has an external link [First image](path/to/image.png "Text to show on mouseover")
+WARNING: 2022/05/09 20:02:22 linkvalidator.go:35: The message Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images.[Google link] ("http://google.com/"), State: Invalid} has an external link [Google link] ("http://google.com/")
+WARNING: 2022/05/09 20:02:22 linkvalidator.go:35: The message Message { UID: 4567, Body: # Starts with heading 1
+![First image (tea)](path/to/image.png "Text-to-show-on-mouseover")[Internal link] ("/internal/path"), State: Invalid} has an external link [First image (tea)](path/to/image.png "Text-to-show-on-mouseover")[Internal link] ("/internal/path")
+WARNING: 2022/05/09 20:02:22 linkvalidator.go:35: The message Message { UID: 5678, Body: #### Starts with heading 4 
+![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid} has an external link [First [image]    ](path/to/image.png "Text, to, show, on, mouseover")
+WARNING: 2022/05/09 20:02:22 linkvalidator.go:35: The message Message { UID: 5678, Body: Starts with a paragraph
+![]() <!--state: Rejected   -->
+# Contains heading1, State: Invalid} has an external link []()
+WARNING: 2022/05/09 20:02:22 linkvalidator.go:35: The message Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->[Google invalid link] ("google.com/"), State: Invalid} has an external link [Google invalid link] ("google.com/")
+INFO: 2022/05/09 20:02:37 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 20:02:37 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/09 20:02:37 textvalidator.go:16: Creating text validator
+WARNING: 2022/05/09 20:02:44 linkvalidator.go:35: The message Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid} has an external link [First image](path/to/image.png "Text to show on mouseover")
+INFO: 2022/05/09 20:05:25 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 20:05:25 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/09 20:05:25 textvalidator.go:16: Creating text validator
+WARNING: 2022/05/09 20:05:25 linkvalidator.go:35: The message Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid} has an external link [First image](path/to/image.png "Text to show on mouseover")
+WARNING: 2022/05/09 20:05:25 linkvalidator.go:35: The message Message { UID: 3456, Body: #   Starts with heading 1
+Just a message without any images. Just a message without any images. Just a message without any images.[Google link] ("https://google.com/"), State: Invalid} has an external link [Google link] ("https://google.com/")
+WARNING: 2022/05/09 20:05:25 linkvalidator.go:35: The message Message { UID: 4567, Body: # Starts with heading 1
+![First image (tea)](path/to/image.png "Text-to-show-on-mouseover")[Internal link] ("/internal/path"), State: Invalid} has an external link [First image (tea)](path/to/image.png "Text-to-show-on-mouseover")[Internal link] ("/internal/path")
+WARNING: 2022/05/09 20:05:25 linkvalidator.go:35: The message Message { UID: 5678, Body: #### Starts with heading 4 
+![First [image]    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: acc   -->, State: Invalid} has an external link [First [image]    ](path/to/image.png "Text, to, show, on, mouseover")
+WARNING: 2022/05/09 20:05:25 linkvalidator.go:35: The message Message { UID: 5678, Body: Starts with a paragraph
+![]() <!--state: Rejected   -->
+# Contains heading1, State: Invalid} has an external link []()
+WARNING: 2022/05/09 20:05:25 linkvalidator.go:35: The message Message { UID: 5678, Body: # Heading
+ Paragraph 
+!(path/to/image) <!--state: queued   -->[Google invalid link] ("google.com/"), State: Invalid} has an external link [Google invalid link] ("google.com/")
+INFO: 2022/05/09 20:05:45 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/09 20:05:45 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/09 20:05:45 textvalidator.go:16: Creating text validator
+WARNING: 2022/05/09 20:05:50 linkvalidator.go:35: The message Message { UID: 1234, Body: ![First image](path/to/image.png "Text to show on mouseover") <!--state: Rejected--> 
+![Second image (tea)](path/to/image.png "Text-to-show-on-mouseover") <!--state: Accepted   --> 
+![Third image, added](path/to/image.png       "Text-to-show-on-mouseover") <!--    state:    rejected-->
+Some basic text
+![Forth image    ](path/to/image.png "Text, to, show, on, mouseover") <!--state: invalid-->
+![Fifth image](path/to/image.png "Text to show on mouseover") <!--state: accepted-->, State: Invalid} has an external link [First image](path/to/image.png "Text to show on mouseover")
+INFO: 2022/05/10 15:26:07 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/10 15:26:07 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/10 15:26:07 textvalidator.go:16: Creating text validator
+INFO: 2022/05/10 15:26:07 linkvalidator.go:39: Checking link "https://google.com/"
+WARNING: 2022/05/10 15:26:07 linkvalidator.go:44: The URL "https://google.com/" could not be parsed parse "\"https://google.com/\"": first path segment in URL cannot contain colon
+INFO: 2022/05/10 15:28:55 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/10 15:28:55 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/10 15:28:55 textvalidator.go:16: Creating text validator
+INFO: 2022/05/10 15:28:55 linkvalidator.go:44: Checking link "https://google.com/"
+WARNING: 2022/05/10 15:28:55 linkvalidator.go:49: The URL "https://google.com/" could not be parsed parse "\"https://google.com/\"": first path segment in URL cannot contain colon
+INFO: 2022/05/10 15:29:47 imagevalidator.go:15: Creating image validator
+INFO: 2022/05/10 15:29:47 linkvalidator.go:16: Creating link validator
+INFO: 2022/05/10 15:29:47 textvalidator.go:16: Creating text validator
+INFO: 2022/05/10 15:29:47 linkvalidator.go:44: Checking link "https://google.com/"
+WARNING: 2022/05/10 15:29:47 linkvalidator.go:49: The URL "https://google.com/" could not be parsed parse "\"https://google.com/\"": first path segment in URL cannot contain colon

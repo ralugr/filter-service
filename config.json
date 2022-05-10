@@ -1,0 +1,5 @@
+{
+  "DBName" : "storage.db",
+  "Port" : 8080,
+  "Host" : "localhost"
+}
