@@ -1,11 +1,12 @@
 package processor
 
 import (
+	"reflect"
+
 	"github.com/ralugr/filter-service/internal/logger"
 	"github.com/ralugr/filter-service/internal/model"
 	"github.com/ralugr/filter-service/internal/repository"
 	"github.com/ralugr/filter-service/internal/validators"
-	"reflect"
 )
 
 type Processor struct {
@@ -23,20 +24,20 @@ func New(v []validators.Base, r repository.Base) *Processor {
 	}
 }
 
-func (p *Processor) FilterMessage(message model.Message) {
+func (p *Processor) FilterMessage(message *model.Message) {
 	logger.Info.Println("Message is being filtered: ", message)
 
 	for _, elem := range p.validators {
-		err := elem.Validate(&message)
+		err := elem.Validate(message)
 		if err != nil {
 			logger.Warning.Println("Validation failed with error: ", err) // have a package with predefined errors
 		}
 
 		if message.State == model.Rejected || message.State == model.Queued {
 			logger.Info.Println("Saving message into the repo: ", message)
-			err = p.repo.Store(&message)
+			err = p.repo.Store(message)
 			if err != nil {
-				logger.Warning.Println("Could not save message %v into repo", message)
+				logger.Warning.Printf("Could not save message %v into repo", message)
 			}
 			return
 		}

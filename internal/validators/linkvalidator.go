@@ -1,9 +1,10 @@
 package validators
 
 import (
+	"strings"
+
 	"github.com/ralugr/filter-service/internal/logger"
 	"github.com/ralugr/filter-service/internal/model"
-	"strings"
 )
 
 // LinkValidator responsible for checking for links and validating them

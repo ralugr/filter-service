@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/ralugr/filter-service/internal/adapter"
 	"github.com/ralugr/filter-service/internal/config"
@@ -42,13 +43,13 @@ func NewSQLiteDB(cfg *config.Config) (*SQLiteDB, error) {
 
 	err = sqlite.createTable(rejMsg)
 	if err != nil {
-		logger.Warning.Println("Could not create table %v", err)
+		logger.Warning.Printf("Could not create table %v", err)
 		return nil, err
 	}
 
 	err = sqlite.createTable(queuedMsg)
 	if err != nil {
-		logger.Warning.Println("Could not create table %v", err)
+		logger.Warning.Printf("Could not create table %v", err)
 		return nil, err
 	}
 
@@ -68,6 +69,7 @@ func (sqlite *SQLiteDB) Store(message *model.Message) error {
 
 	if err != nil {
 		logger.Warning.Printf("Storing message %v failed ", err)
+		return errors.New("failed to insert message")
 	}
 
 	return nil
@@ -101,10 +103,10 @@ func (sqlite *SQLiteDB) createTable(query string) error {
 
 func (sqlite *SQLiteDB) insertMessage(message *model.Message, table string) error {
 	logger.Info.Printf("Starting INSERT query on %v table, message %v", table, message)
-	_, err := sqlite.db.Exec("INSERT INTO "+table+" (uid,body,state,reason) VALUES(?,?,?,?);", message.UID, message.Body, message.State, message.Reason)
+	_, err := sqlite.db.Exec("INSERT INTO "+table+" (uid,body,state,reason) VALUES(?,?,?,?)", message.UID, message.Body, message.State, message.Reason)
 
 	if err != nil {
-		logger.Info.Printf("Could not insert message %v into %v table ", message, table)
+		logger.Info.Printf("Could not insert message %v into %v table: Reason %v ", message, table, err.Error())
 		return err
 	} else {
 		logger.Info.Printf("Insert successful for message %v into %v table ", message, table)

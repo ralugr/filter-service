@@ -2,10 +2,11 @@ package validators
 
 import (
 	"fmt"
-	"github.com/ralugr/filter-service/internal/common"
-	"github.com/ralugr/filter-service/internal/model"
 	"reflect"
 	"testing"
+
+	"github.com/ralugr/filter-service/internal/common"
+	"github.com/ralugr/filter-service/internal/model"
 )
 
 var validator = NewImageValidator()
@@ -19,7 +20,7 @@ func TestGetTags(t *testing.T) {
 		{common.MockMessage1, model.Accepted, []string{"<!--state: Accepted   -->", "<!--state: accepted-->"}},
 		{common.MockMessage1, model.Rejected, []string{"<!--state: Rejected-->", "<!--    state:    rejected-->"}},
 		{common.MockMessage2, model.Accepted, nil},
-		{common.MockMessage3, model.Accepted, []string{"<!--state: Accepted   -->"}},
+		{common.MockMessage3, model.Accepted, []string{"<!--state: accepted   -->"}},
 		{common.MockMessage3, model.Rejected, nil},
 		{common.MockMessage4, model.Accepted, nil},
 		{common.MockMessage4, model.Rejected, []string{"<!--state: rejected   -->"}},
@@ -92,10 +93,10 @@ func TestValidate(t *testing.T) {
 	}{
 		{common.MockMessage1, nil, model.Rejected},
 		{common.MockMessage2, nil, model.Accepted},
-		{common.MockMessage3, nil, model.Queued},
-		{common.MockMessage4, nil, model.Queued},
 		{common.MockMessage5, nil, model.Rejected},
 		{common.MockMessage6, nil, model.Accepted},
+		{common.MockMessage7, nil, model.Queued},
+		{common.MockMessage8, nil, model.Queued},
 	}
 
 	for tc, tt := range input {

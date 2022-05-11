@@ -2,9 +2,10 @@ package validators
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/ralugr/filter-service/internal/common"
 	"github.com/ralugr/filter-service/internal/model"
-	"testing"
 )
 
 var textValidator = NewTextValidator()
@@ -59,7 +60,7 @@ func TestValidateText(t *testing.T) {
 	input := []struct {
 		m        model.Message
 		expected error
-		newState model.MsgState
+		newState string
 	}{
 		{common.MockMessage1, nil, model.Rejected},
 		{common.MockMessage2, nil, model.Accepted},

@@ -9,10 +9,16 @@ This is the repository for the message filter service
 
 [This is an external link to genome.gov]
 
-(https://www.genome.gov/)
+[Link](https://www.genome.gov/)
 
 brew install sqlite3
 brew install sqlite-utils
 go get github.com/mattn/go-sqlite3
 
 [Custom foo description](#foo)
+
+
+Further improvements:
+- Use a logging framework (if needed)
+- Control log level
+- 

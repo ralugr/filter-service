@@ -1,9 +1,10 @@
 package validators
 
 import (
+	"regexp"
+
 	"github.com/ralugr/filter-service/internal/logger"
 	"github.com/ralugr/filter-service/internal/model"
-	"regexp"
 )
 
 // ImageValidator responsible for checking for images and adding messages to approval queue if needed
@@ -23,7 +24,7 @@ func NewImageValidator() *ImageValidator {
 func (iv *ImageValidator) Validate(message *model.Message) error {
 	logger.Info.Println("Entering image validator with message ", message)
 
-	if iv.hasImages(message) == false {
+	if !iv.hasImages(message) {
 		message.State = model.Accepted
 		logger.Info.Printf("The message %v has no images, exiting ImageValidator ", message)
 
@@ -36,19 +37,19 @@ func (iv *ImageValidator) Validate(message *model.Message) error {
 	if hasRejectedTags {
 		message.State = model.Rejected
 		message.Reason = model.ImageValidationFailed
-		logger.Info.Println("Message %v rejected by image validator with reason %v", message, message.Reason)
+		logger.Info.Printf("Message %v rejected by image validator with reason %v", message, message.Reason)
 		return nil
 	}
 
 	if hasAcceptedTags {
 		message.State = model.Accepted
-		logger.Info.Println("Message %v accepted by image validator", message)
+		logger.Info.Printf("Message %v accepted by image validator", message)
 		return nil
 	}
 
 	message.State = model.Queued
 	message.Reason = model.ManualValidationNeeded
-	logger.Info.Println("Message %v queued by image validator with reason %v", message, message.Reason)
+	logger.Info.Printf("Message %v queued by image validator with reason %v", message, message.Reason)
 
 	return nil
 }

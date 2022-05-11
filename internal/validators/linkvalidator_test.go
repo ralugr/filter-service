@@ -2,9 +2,10 @@ package validators
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/ralugr/filter-service/internal/common"
 	"github.com/ralugr/filter-service/internal/model"
-	"testing"
 )
 
 var linkValidator = NewLinkValidator()
