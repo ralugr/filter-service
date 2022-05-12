@@ -27,7 +27,7 @@ func New(p *processor.Processor, c *config.Config) *Handlers {
 }
 
 func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
-	if _, err := w.Write([]byte("<h1>Welcome to the filter service!!</h1>")); err != nil {
+	if _, err := w.Write([]byte("Welcome to the filter service!!")); err != nil {
 		logger.Warning.Printf("Could not write welcome message")
 		respond.Error(w, 500, "Encountered internal error")
 		return
