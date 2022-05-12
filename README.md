@@ -14,6 +14,7 @@ This is the repository for the message filter service
 ## Pulling upstream changes from the project remote
 By default, the git pull command recursively fetches submodules changes, however, it does not update the submodules.
 > git pull
+
 To finalize the update, you need to run git submodule update
 > git submodule update --init --recursive
 
