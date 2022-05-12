@@ -61,6 +61,7 @@ func NewSQLiteDB(cfg *config.Config) (*SQLiteDB, error) {
 	return sqlite, nil
 }
 
+// Stores a message into the database. We store it based the status it has.
 func (sqlite *SQLiteDB) Store(message *model.Message) error {
 	var err error
 	if message.State == model.Rejected {
@@ -79,6 +80,8 @@ func (sqlite *SQLiteDB) Store(message *model.Message) error {
 
 	return nil
 }
+
+// Gets all messages with a specific state
 func (sqlite *SQLiteDB) GetMessages(state string) ([]model.Message, error) {
 	var msg *sql.Rows
 	var err error
@@ -112,6 +115,11 @@ func (sqlite *SQLiteDB) GetBannedWords() (*model.BannedWords, error) {
 	var bw *model.BannedWords
 	rows, err := sqlite.db.Query("SELECT * FROM BannedWords LIMIT 1")
 
+	if err != nil {
+		logger.Warning.Printf("Could not fetch the banned words%v", err)
+		return nil, err
+	}
+
 	var id int
 	var words string
 
@@ -140,6 +148,7 @@ func (sqlite *SQLiteDB) createTable(query string) error {
 	return nil
 }
 
+// Given a table name and a message, inserts the message in the table
 func (sqlite *SQLiteDB) insertMessage(message *model.Message, table string) error {
 	logger.Info.Printf("Starting INSERT query on %v table, message %v", table, message)
 	_, err := sqlite.db.Exec("INSERT INTO "+table+" (uid,body,state,reason) VALUES(?,?,?,?)", message.UID, message.Body, message.State, message.Reason)

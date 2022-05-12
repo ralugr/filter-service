@@ -1,11 +1,11 @@
 package validators
 
 import (
-	"fmt"
+	"strings"
+
 	"github.com/ralugr/filter-service/internal/logger"
 	"github.com/ralugr/filter-service/internal/model"
 	"github.com/ralugr/filter-service/internal/repository"
-	"strings"
 )
 
 //LanguageValidator responsible for checking the language based on a banned words list
@@ -26,7 +26,6 @@ func (lv *LanguageValidator) Validate(message *model.Message) error {
 		message.State = model.Accepted
 		return nil
 	}
-	fmt.Println(bannedWords)
 
 	if lv.hasBannedWords(message, bannedWords) {
 		message.State = model.Rejected
@@ -46,7 +45,7 @@ func (lv *LanguageValidator) hasBannedWords(message *model.Message, bannedWords 
 	for _, bannedWord := range bannedWords.Words {
 		lowerCaseBody := strings.ToLower(message.Body)
 		lowerCaseBannedWord := strings.ToLower(bannedWord)
-		if strings.Index(lowerCaseBody, lowerCaseBannedWord) != -1 {
+		if strings.Contains(lowerCaseBody, lowerCaseBannedWord) {
 			return true
 		}
 	}

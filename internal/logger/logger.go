@@ -1,18 +1,25 @@
 package logger
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
+	"path/filepath"
+	"runtime"
 )
 
 var (
-	Warning *log.Logger
-	Info    *log.Logger
+	Warning    *log.Logger
+	Info       *log.Logger
+	_, b, _, _ = runtime.Caller(0)
+	basepath   = filepath.Dir(b)
 )
 
 func init() {
-	file, err := os.OpenFile("service-logs.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	fmt.Println(basepath)
+
+	file, err := os.OpenFile(basepath+"/../../service-logs.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Printf("Failed to initialize logger: %v", err)
 	}
@@ -22,7 +29,7 @@ func init() {
 }
 
 func createNewLogger(prefix string, file io.Writer) *log.Logger {
-	newLogger := log.New(file, prefix, log.Ldate|log.Ltime|log.Lshortfile)
+	newLogger := log.New(file, "FILTER: "+prefix, log.Ldate|log.Ltime|log.Lshortfile)
 	mw := io.MultiWriter(os.Stdout, file)
 	newLogger.SetOutput(mw)
 

@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"github.com/ralugr/filter-service/internal/config"
 	"io"
 	"net/http"
+
+	"github.com/ralugr/filter-service/internal/config"
 
 	"github.com/ralugr/filter-service/internal/adapter"
 	"github.com/ralugr/filter-service/internal/logger"

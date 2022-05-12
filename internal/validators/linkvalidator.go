@@ -31,6 +31,7 @@ func (lv *LinkValidator) Validate(message *model.Message) error {
 
 // hasExternalLink checks if the message has any valid URL
 func (lv *LinkValidator) hasExternalLink(message *model.Message) bool {
+	// Trying to look for [anything but not another set of [] ](link containing / or http/https, www.something.com, someting.com )
 	pattern := regexp.MustCompile(`\[[^\[\]]*\]\s*\("((?:\bhttps?:\/\/)?[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|])"\)`)
 	links := pattern.FindAllStringSubmatch(message.Body, -1)
 
@@ -40,6 +41,7 @@ func (lv *LinkValidator) hasExternalLink(message *model.Message) bool {
 
 		logger.Info.Printf("Checking link %v", matchedUrl)
 
+		// Parsing the matched url so that we can know if it's an external one or not
 		url, err := url.Parse(matchedUrl)
 
 		if err != nil {
