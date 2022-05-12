@@ -41,5 +41,7 @@ func ConvertRowsToMessages(rows *sql.Rows) ([]model.Message, error) {
 		}
 		messages = append(messages, m)
 	}
+
+	rows.Close()
 	return messages, nil
 }

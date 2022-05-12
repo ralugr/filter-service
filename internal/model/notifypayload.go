@@ -8,5 +8,5 @@ type NotifyPayload struct {
 }
 
 func (n NotifyPayload) String() string {
-	return fmt.Sprintf("Notification { Token: %s, Words: %s}", n.Token, n.Words)
+	return fmt.Sprintf("NotifyPayload { Token: %s, Words: %s}", n.Token, n.Words)
 }

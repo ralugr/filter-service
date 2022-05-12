@@ -20,7 +20,7 @@ func TestHasExternalLink(t *testing.T) {
 		{common.MockMessage3, false},
 		{common.MockMessage4, false},
 		{common.MockMessage5, false},
-		{common.MockMessage6, false},
+		{common.MockMessage6, true},
 	}
 
 	for tc, tt := range input {

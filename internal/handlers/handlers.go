@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/ralugr/filter-service/internal/config"
 	"io"
 	"net/http"
 
@@ -12,19 +13,25 @@ import (
 )
 
 type Handlers struct {
-	processor processor.Processor
+	processor *processor.Processor
+	cfg       *config.Config
 }
 
-func New(p processor.Processor) *Handlers {
+func New(p *processor.Processor, c *config.Config) *Handlers {
 	logger.Info.Println("Creating handlers")
 
 	return &Handlers{
 		processor: p,
+		cfg:       c,
 	}
 }
 
 func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Welcome to the filter service!!</h1>"))
+	if _, err := w.Write([]byte("<h1>Welcome to the filter service!!</h1>")); err != nil {
+		logger.Warning.Printf("Could not write welcome message")
+		respond.Error(w, 500, "Encountered internal error")
+		return
+	}
 }
 
 func (h *Handlers) FilterMessage(w http.ResponseWriter, r *http.Request) {
@@ -74,24 +81,28 @@ func (h *Handlers) QueuedMessages(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handlers) Notify(w http.ResponseWriter, r *http.Request) {
-	msg, err := io.ReadAll(r.Body)
+	n, err := io.ReadAll(r.Body)
 	if err != nil {
 		respond.Error(w, 500, "Encountered internal error")
 		return
 	}
 
-	// Should check if the message contains a Token, otherwise the request is not valid
-	message, err := adapter.ConvertByteArrayToNotifyPayload(msg)
+	// Should check if the notification contains a Token, otherwise the request is not valid
+	notification, err := adapter.ConvertByteArrayToNotifyPayload(n)
 	if err != nil {
 		respond.Error(w, 400, "Failed to decode payload")
 		return
 	}
 
-	if message.Token != "jkhfkashdk1e1jh76t@5$" {
+	if notification.Token != h.cfg.Token {
 		respond.Error(w, 401, "Invalid token")
 		return
 	}
 
-	logger.Info.Println(message)
+	logger.Info.Println("Received ", notification)
+
+	bw := model.NewBannedWords(notification.Words)
+	h.processor.UpdateBannedWords(bw)
+
 	respond.Success(w, "Updated words")
 }

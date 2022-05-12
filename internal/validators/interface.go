@@ -5,5 +5,5 @@ import (
 )
 
 type Base interface {
-	Validate(message *model.Message) error
+	Validate(*model.Message) error
 }

@@ -1,5 +1,8 @@
 {
   "DBName" : "storage.db",
   "Port" : 8080,
-  "Host" : "localhost"
+  "Token" : "fh343728hdn5dj5sk234",
+  "BannedWordsUrl": "http://localhost:8081/list",
+  "SubscribeUrl": "http://localhost:8081/subscribe",
+  "NotifyUrl": "http://localhost:8080/notify"
 }

@@ -3,11 +3,12 @@ package model
 //type Reason int
 
 const (
-	Unset                  = "Unset"
-	ManualValidationNeeded = "ManualValidationNeeded"
-	TextValidationFailed   = "TextValidationFailed"
-	LinkValidationFailed   = "LinkValidationFailed"
-	ImageValidationFailed  = "ImageValidationFailed"
+	Unset                    = "Unset"
+	ManualValidationNeeded   = "ManualValidationNeeded"
+	TextValidationFailed     = "TextValidationFailed"
+	LinkValidationFailed     = "LinkValidationFailed"
+	ImageValidationFailed    = "ImageValidationFailed"
+	LanguageValidationFailed = "LanguageValidationFailed"
 )
 
 //func (r Reason) String() string {

@@ -15,7 +15,7 @@ var MockMessage1 = model.Message{
 var MockMessage2 = model.Message{
 	UID: "3456",
 	Body: "#   Starts with heading 1\n" +
-		"Just a message without any images. Just a message without any images. Just a message without any images." +
+		"Just a message without any images. Just a message without any images. Just a message without any images.\n" +
 		"[Google link] (\"https://google.com/\")",
 	State: model.Invalid,
 }
@@ -48,7 +48,8 @@ var MockMessage6 = model.Message{
 	Body: "# Heading\n" +
 		" Paragraph \n" +
 		"!(path/to/image) <!--state: queued   -->" +
-		"[Google invalid link] (\"google.com/\")",
+		"[Google valid link] (\"google.com/\")" +
+		"[Google valid link] (\"https://google.com/\")",
 	State: model.Invalid,
 }
 

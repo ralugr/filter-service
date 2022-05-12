@@ -5,6 +5,8 @@ import (
 )
 
 type Base interface {
-	Store(message *model.Message) error
-	GetMessages(state string) ([]model.Message, error)
+	Store(*model.Message) error
+	GetMessages(string) ([]model.Message, error)
+	UpdateBannedWords(*model.BannedWords) error
+	GetBannedWords() (*model.BannedWords, error)
 }

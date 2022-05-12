@@ -2,6 +2,7 @@ package processor
 
 import (
 	"reflect"
+	"strings"
 
 	"github.com/ralugr/filter-service/internal/logger"
 	"github.com/ralugr/filter-service/internal/model"
@@ -14,7 +15,6 @@ type Processor struct {
 	repo       repository.Base
 }
 
-// New takes an sqs client and config and returns a new processor
 func New(v []validators.Base, r repository.Base) *Processor {
 	logger.Info.Printf("Creating a new processor with the following validators: %v and repo: %v", reflect.TypeOf(v), reflect.TypeOf(r))
 
@@ -26,6 +26,10 @@ func New(v []validators.Base, r repository.Base) *Processor {
 
 func (p *Processor) FilterMessage(message *model.Message) {
 	logger.Info.Println("Message is being filtered: ", message)
+
+	// Replaced <br> with \n
+	newBody := strings.Replace(message.Body, "<br>", "\n", -1)
+	message.Body = newBody
 
 	for _, elem := range p.validators {
 		err := elem.Validate(message)
@@ -46,4 +50,8 @@ func (p *Processor) FilterMessage(message *model.Message) {
 
 func (p *Processor) GetMessages(state string) ([]model.Message, error) {
 	return p.repo.GetMessages(state)
+}
+
+func (p *Processor) UpdateBannedWords(bw *model.BannedWords) error {
+	return p.repo.UpdateBannedWords(bw)
 }

@@ -2,6 +2,7 @@ package validators
 
 import (
 	"bufio"
+	"fmt"
 	"github.com/ralugr/filter-service/internal/logger"
 	"github.com/ralugr/filter-service/internal/model"
 	"regexp"
@@ -47,10 +48,12 @@ func (tv *TextValidator) startsWithHeading1(message *model.Message) bool {
 
 // hasParagraph checks whether a message contains at least one paragraph (a line that starts with a letter)
 func (tv *TextValidator) hasParagraph(message *model.Message) bool {
+	fmt.Println(message)
 	scanner := bufio.NewScanner(strings.NewReader(message.Body))
 	pattern := regexp.MustCompile(`^ *[a-zA-Z]+.*$`)
 
 	for scanner.Scan() {
+		fmt.Println(scanner.Text())
 		if pattern.MatchString(scanner.Text()) {
 			return true
 		}

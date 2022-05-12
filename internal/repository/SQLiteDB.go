@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+	"strings"
 
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/ralugr/filter-service/internal/adapter"
@@ -14,7 +15,7 @@ import (
 const rejMsg string = `
 	CREATE TABLE IF NOT EXISTS RejectedMessages (
     	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-		uid INTEGER NOT NULL UNIQUE,
+		uid TEXT NOT NULL UNIQUE,
     	body TEXT NOT NULL,
 		state TEXT NOT NULL,
 		reason TEXT NOT NULL
@@ -23,10 +24,16 @@ const rejMsg string = `
 const queuedMsg string = `
 	CREATE TABLE IF NOT EXISTS QueuedMessages (
   		id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-		uid INTEGER NOT NULL UNIQUE,
+		uid TEXT NOT NULL UNIQUE,
   		body TEXT NOT NULL,
 		state TEXT NOT NULL,
 		reason TEXT NOT NULL
+	);`
+
+const bannedWords string = `
+	CREATE TABLE IF NOT EXISTS BannedWords (
+  		id INTEGER NOT NULL PRIMARY KEY,
+		words TEXT NOT NULL
 	);`
 
 type SQLiteDB struct {
@@ -41,15 +48,13 @@ func NewSQLiteDB(cfg *config.Config) (*SQLiteDB, error) {
 	}
 	sqlite := &SQLiteDB{db}
 
-	err = sqlite.createTable(rejMsg)
-	if err != nil {
-		logger.Warning.Printf("Could not create table %v", err)
+	if err = sqlite.createTable(rejMsg); err != nil {
 		return nil, err
 	}
-
-	err = sqlite.createTable(queuedMsg)
-	if err != nil {
-		logger.Warning.Printf("Could not create table %v", err)
+	if err = sqlite.createTable(queuedMsg); err != nil {
+		return nil, err
+	}
+	if err = sqlite.createTable(bannedWords); err != nil {
 		return nil, err
 	}
 
@@ -91,6 +96,40 @@ func (sqlite *SQLiteDB) GetMessages(state string) ([]model.Message, error) {
 	}
 
 	return adapter.ConvertRowsToMessages(msg)
+}
+
+func (sqlite *SQLiteDB) UpdateBannedWords(bw *model.BannedWords) error {
+	_, err := sqlite.db.Exec("REPLACE INTO BannedWords (id, words) VALUES(?,?)", bw.Id, strings.Join(bw.Words, ","))
+
+	if err != nil {
+		logger.Warning.Printf("Could not replace words in db %v", err)
+		return err
+	}
+	return nil
+}
+
+func (sqlite *SQLiteDB) GetBannedWords() (*model.BannedWords, error) {
+	var bw *model.BannedWords
+	rows, err := sqlite.db.Query("SELECT * FROM BannedWords LIMIT 1")
+
+	var id int
+	var words string
+
+	rows.Next()
+	err = rows.Scan(&id, &words)
+	rows.Close()
+
+	if words != "" {
+		bw = model.NewBannedWords(strings.Split(words, ","))
+	}
+
+	if err != nil {
+		logger.Warning.Printf("Could not get banned words from db %v", err)
+		return bw, err
+	}
+
+	logger.Info.Printf("Banned words retrieved from db %v", bw)
+	return bw, nil
 }
 
 func (sqlite *SQLiteDB) createTable(query string) error {
