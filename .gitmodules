@@ -1,0 +1,3 @@
+[submodule "language-service"]
+	path = language-service
+	url = https://github.com/ralugr/language-service
