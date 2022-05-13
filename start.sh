@@ -1,5 +1,3 @@
-./stop.sh
-
 cd language-service/
 go run main.go &
 cd ../
