@@ -127,19 +127,19 @@ func (sqlite *SQLiteDB) GetBannedWords() (*model.BannedWords, error) {
 	var id int
 	var words string
 
-	rows.Next()
-	err = rows.Scan(&id, &words)
-	rows.Close()
+	if rows.Next() {
+		err = rows.Scan(&id, &words)
+		defer rows.Close()
 
-	if words != "" {
-		bw = model.NewBannedWords(strings.Split(words, ","))
+		if words != "" {
+			bw = model.NewBannedWords(strings.Split(words, ","))
+		}
+
+		if err != nil {
+			logger.Warning.Printf("Could not get banned words from db %v", err)
+			return bw, err
+		}
 	}
-
-	if err != nil {
-		logger.Warning.Printf("Could not get banned words from db %v", err)
-		return bw, err
-	}
-
 	logger.Info.Printf("Banned words retrieved from db %v", bw)
 	return bw, nil
 }

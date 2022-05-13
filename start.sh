@@ -1,6 +1,6 @@
 ./stop.sh
 
 cd language-service/
-go run main.go >> ../all_logs.log 2>&1 &
+go run main.go &
 cd ../
-go run cmd/*.go >> all_logs.log 2>&1 &
+go run cmd/*.go
