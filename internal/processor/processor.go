@@ -50,6 +50,8 @@ func (p *Processor) FilterMessage(message *model.Message) {
 			return
 		}
 	}
+
+	logger.Info.Printf("Message approved")
 }
 
 // GetMessages redirects call to the repository for retrieving rejected or queued messages
