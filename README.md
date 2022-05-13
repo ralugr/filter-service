@@ -21,6 +21,9 @@ By default, the git pull command recursively fetches submodules changes, however
 To finalize the update, you need to run git submodule update
 > git submodule update --init --recursive
 
+## Run
+> ./start.sh
+
 ## Features
 - Submit a message for filtering
 - Fetch rejected messages by any of the validators 
@@ -36,41 +39,50 @@ To finalize the update, you need to run git submodule update
   - id (string)
   - body (string) - in the Markdown format 
 > POST "/filter_message"
->> {  
-     "id" : "32s333422",  
-     "body": "#Heading 1<br> paragraph<br> [link](path/to/image)"  
-  }
+```yaml  
+{
+    "id" : "32s333422",
+    "body": "#Heading 1<br> paragraph<br> ![alt image](path/to/image)"
+}
+```
 
 - Rejected message list has the format given below with the keys id(string), body(string), state(string), reason(string).
 > GET "/rejected_messages"
->> {  
-"success": true,  
-"response": [  
-{    
-"id": "32s33322",  
-"body": "#Heading 1\ncat paragraph ",  
-"State": "Rejected",  
-"Reason": "LanguageValidationFailed"  
-},  
-{  
-"id": "32s33342214d",  
-"body": "#Heading 1\ncat paragraph ",  
-"State": "Rejected",  
-"Reason": "LanguageValidationFailed"  
-}]}
+```yaml 
+{
+    "success": true,
+    "response": [
+        {
+            "id": "32s33322",
+            "body": "#Heading 1\ncat paragraph ",
+            "State": "Rejected",
+            "Reason": "LanguageValidationFailed"
+        },
+        {
+            "id": "32s333422",
+            "body": "#Heading 1\ncat paragraph ",
+            "State": "Rejected",
+            "Reason": "LanguageValidationFailed"
+        }
+    ]
+}
+```
 
 - Queued message list has the format given below with the keys id(string), body(string), state(string), reason(string).
 > GET "/queued_messages"
->> {  
-"success": true,
-"response": [  
-{  
-"id": "32s333422",  
-"body": "#Heading 1\n paragraph\n ![alt image](path/to/image)",  
-"State": "Queued",  
-"Reason": "ManualValidationNeeded"  
-}]}
-
+```yaml  
+{
+    "success": true,
+    "response": [
+        {
+            "id": "32s333422",
+            "body": "#Heading 1\n paragraph\n ![alt image](path/to/image)",
+            "State": "Queued",
+            "Reason": "ManualValidationNeeded"
+        }
+    ]
+}
+```
 
 ### Structure
 The brain of the service is called `processor`. This component is used to decouple interfaces from concrete implementations.  

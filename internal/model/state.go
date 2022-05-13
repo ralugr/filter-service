@@ -1,6 +1,6 @@
 package model
 
-// Valid statuses for a message
+// Valid states for a message
 const (
 	Invalid  = "Invalid"
 	Queued   = "Queued"

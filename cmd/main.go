@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -11,13 +10,10 @@ import (
 	"github.com/ralugr/filter-service/internal/service"
 )
 
-const portNumber = ":8080"
-
 func main() {
-
 	srv, err := service.New("config.json")
 	if err != nil {
-		log.Fatal("Service initialization failed ", err)
+		logger.Warning.Fatal("Service initialization failed ", err)
 	}
 
 	logger.Info.Println("Connecting to port ", srv.Cfg.Port)
@@ -25,7 +21,7 @@ func main() {
 	writePID()
 
 	err = http.ListenAndServe(":"+strconv.Itoa(srv.Cfg.Port), routes(srv.Handlers))
-	log.Fatal(err)
+	logger.Warning.Fatal(err)
 }
 
 func writePID() {
@@ -34,7 +30,7 @@ func writePID() {
 	f, err := os.Create("filter_service.pid")
 
 	if err != nil {
-		log.Fatal(err)
+		logger.Warning.Fatal(err)
 	}
 
 	defer f.Close()
@@ -42,6 +38,6 @@ func writePID() {
 	_, err2 := f.WriteString(fmt.Sprintf("%d", pid))
 
 	if err2 != nil {
-		log.Fatal(err2)
+		logger.Warning.Fatal(err2)
 	}
 }

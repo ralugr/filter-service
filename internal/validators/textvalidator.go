@@ -9,15 +9,17 @@ import (
 	"strings"
 )
 
-// TextValidator responsible for checking for links and validating them
+// TextValidator responsible for checking the syntax of the message
 type TextValidator struct {
 }
 
+// NewTextValidator constructor
 func NewTextValidator() *TextValidator {
 	logger.Info.Println("Creating text validator")
 	return &TextValidator{}
 }
 
+// Validate checks if the message starts with a heading and contains at lest one paragraph
 func (tv *TextValidator) Validate(message *model.Message) error {
 	logger.Info.Println("Entering text validator with message ", message)
 
@@ -35,7 +37,7 @@ func (tv *TextValidator) Validate(message *model.Message) error {
 	return nil
 }
 
-// startsWith checks whether the message starts with the given string
+// startsWith checks whether the message starts with heading 1
 func (tv *TextValidator) startsWithHeading1(message *model.Message) bool {
 	pattern := regexp.MustCompile(`^#[^#\n].*`)
 	if pattern.MatchString(message.Body) {

@@ -7,10 +7,11 @@ import (
 	"github.com/ralugr/filter-service/internal/model"
 )
 
-// ImageValidator responsible for checking for images and adding messages to approval queue if needed
+// ImageValidator responsible for checking for images and adding the appropriate State and Reason
 type ImageValidator struct {
 }
 
+// NewImageValidator constuctor
 func NewImageValidator() *ImageValidator {
 	logger.Info.Println("Creating image validator")
 	return &ImageValidator{}
@@ -65,7 +66,8 @@ func (iv *ImageValidator) hasImages(message *model.Message) bool {
 	return images != nil
 }
 
-// <!-- state: Rejected -->
+// hasTag checks if the message has any tags having the following syntax, case insensitive:
+// <!-- state: Rejected --> <!-- state: Approved -->
 func (iv *ImageValidator) hasTag(message *model.Message, state string) bool {
 
 	tags := iv.getTags(message, state)
@@ -73,6 +75,7 @@ func (iv *ImageValidator) hasTag(message *model.Message, state string) bool {
 	return tags != nil
 }
 
+// getTags returns all the tags found in the message
 func (iv *ImageValidator) getTags(message *model.Message, state string) []string {
 	body := message.Body
 

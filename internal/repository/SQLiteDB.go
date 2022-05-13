@@ -36,10 +36,12 @@ const bannedWords string = `
 		words TEXT NOT NULL
 	);`
 
+// SQLiteDB implements repository.Base
 type SQLiteDB struct {
 	db *sql.DB
 }
 
+// NewSQLiteDB constructor
 func NewSQLiteDB(cfg *config.Config) (*SQLiteDB, error) {
 	db, err := sql.Open("sqlite3", cfg.DBName)
 	if err != nil {
@@ -61,7 +63,7 @@ func NewSQLiteDB(cfg *config.Config) (*SQLiteDB, error) {
 	return sqlite, nil
 }
 
-// Stores a message into the database. We store it based the status it has.
+// Store a message into the database based on the status it has.
 func (sqlite *SQLiteDB) Store(message *model.Message) error {
 	var err error
 	if message.State == model.Rejected {
@@ -81,7 +83,7 @@ func (sqlite *SQLiteDB) Store(message *model.Message) error {
 	return nil
 }
 
-// Gets all messages with a specific state
+// GetMessages returns messages with a specific state
 func (sqlite *SQLiteDB) GetMessages(state string) ([]model.Message, error) {
 	var msg *sql.Rows
 	var err error
@@ -101,6 +103,7 @@ func (sqlite *SQLiteDB) GetMessages(state string) ([]model.Message, error) {
 	return adapter.ConvertRowsToMessages(msg)
 }
 
+// UpdateBannedWords replaces the current banned words list
 func (sqlite *SQLiteDB) UpdateBannedWords(bw *model.BannedWords) error {
 	_, err := sqlite.db.Exec("REPLACE INTO BannedWords (id, words) VALUES(?,?)", bw.Id, strings.Join(bw.Words, ","))
 
@@ -111,6 +114,7 @@ func (sqlite *SQLiteDB) UpdateBannedWords(bw *model.BannedWords) error {
 	return nil
 }
 
+// GetBannedWords returned the list of banned words
 func (sqlite *SQLiteDB) GetBannedWords() (*model.BannedWords, error) {
 	var bw *model.BannedWords
 	rows, err := sqlite.db.Query("SELECT * FROM BannedWords LIMIT 1")
@@ -140,6 +144,7 @@ func (sqlite *SQLiteDB) GetBannedWords() (*model.BannedWords, error) {
 	return bw, nil
 }
 
+// createTable creates new table based on the given query
 func (sqlite *SQLiteDB) createTable(query string) error {
 	if _, err := sqlite.db.Exec(query); err != nil {
 		logger.Warning.Println("Could not create table", err)
@@ -148,7 +153,7 @@ func (sqlite *SQLiteDB) createTable(query string) error {
 	return nil
 }
 
-// Given a table name and a message, inserts the message in the table
+// insertMessage, given a table name and a message, inserts the message in the table
 func (sqlite *SQLiteDB) insertMessage(message *model.Message, table string) error {
 	logger.Info.Printf("Starting INSERT query on %v table, message %v", table, message)
 	_, err := sqlite.db.Exec("INSERT INTO "+table+" (uid,body,state,reason) VALUES(?,?,?,?)", message.UID, message.Body, message.State, message.Reason)
@@ -163,6 +168,7 @@ func (sqlite *SQLiteDB) insertMessage(message *model.Message, table string) erro
 	return nil
 }
 
+// selectAll returns all the rows from a given table
 func (sqlite *SQLiteDB) selectAll(table string) (*sql.Rows, error) {
 	logger.Info.Printf("Starting SELECT query on %v table", table)
 	msg, err := sqlite.db.Query("SELECT * FROM " + table)

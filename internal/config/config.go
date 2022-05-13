@@ -8,26 +8,30 @@ import (
 	"github.com/ralugr/filter-service/internal/logger"
 )
 
+// Config is used to store all the user config values from config.json
 type Config struct {
 	// Name of the database file
 	DBName string `json:"DBName"`
-	// The port thhis application runs on
+
+	// The port this application runs on
 	Port int `json:"Port"`
-	// Token send to the language service for authentication purposes.
-	// We exposed a notify route that updates the banned words list
-	// that the language filter uses. We only want the services with
-	// this token to be able to do that.
+
+	// Token send to the language-service for authentication purposes.
+	// Filter-service contains a /notify route used for receiving banned list updates.
+	// Only services that have this Token are able send a notification on this route.
 	Token string `json:"Token"`
-	// Url from with we get the bad words from. This happens when application starts.
+
+	// Url for retrieving the banned words list. Used at application startup only.
 	BannedWordsUrl string `json:"BannedWordsUrl"`
-	// Url of the language service that we call on this service starts. The url tells
-	// the language service that we want to be notified whenever its banned words list
-	// is updated
+
+	// Url used to subscribe to the language-service and get the banned words list updates.
 	SubscribeUrl string `json:"SubscribeUrl"`
-	// The url at which the language service send us the updated list of banned words
+
+	// The url at which the language-service send us the updated list of banned words
 	NotifyUrl string `json:"NotifyUrl"`
 }
 
+// New constructor
 func New(file string) (*Config, error) {
 	var config Config
 	configFile, err := os.Open(file)
@@ -48,6 +52,7 @@ func New(file string) (*Config, error) {
 	return &config, nil
 }
 
+// String used for printing and logging
 func (c *Config) String() string {
 	return fmt.Sprintf("Config { DBName: %s, Port: %d, Token: %s, BannedWordsUrl: %s, SubscribeUrl: %s}", c.DBName, c.Port, c.Token, c.BannedWordsUrl, c.SubscribeUrl)
 }

@@ -13,11 +13,13 @@ import (
 	"github.com/ralugr/filter-service/internal/respond"
 )
 
+// Handlers defines all the available handlers and redirect calls to the processor
 type Handlers struct {
 	processor *processor.Processor
 	cfg       *config.Config
 }
 
+// New constructor
 func New(p *processor.Processor, c *config.Config) *Handlers {
 	logger.Info.Println("Creating handlers")
 
@@ -27,6 +29,7 @@ func New(p *processor.Processor, c *config.Config) *Handlers {
 	}
 }
 
+// Home handler, used for testing connection to the service
 func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
 	if _, err := w.Write([]byte("Welcome to the filter service!!")); err != nil {
 		logger.Warning.Printf("Could not write welcome message")
@@ -35,6 +38,7 @@ func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// FilterMessage receives a message and redirects it to the processor
 func (h *Handlers) FilterMessage(w http.ResponseWriter, r *http.Request) {
 	msg, err := io.ReadAll(r.Body)
 	if err != nil {
@@ -42,7 +46,6 @@ func (h *Handlers) FilterMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Should check if the message contains an ID, otherwise the message is not valid
 	message, err := adapter.ConvertByteArrayToMessage(msg)
 	if err != nil {
 		respond.Error(w, 400, "Failed to decode payload")
@@ -59,6 +62,7 @@ func (h *Handlers) FilterMessage(w http.ResponseWriter, r *http.Request) {
 	respond.Success(w, message.State)
 }
 
+// RejectedMessages communicates with the processor for retrieving the rejected messages
 func (h *Handlers) RejectedMessages(w http.ResponseWriter, r *http.Request) {
 	msg, err := h.processor.GetMessages(model.Rejected)
 	if err != nil {
@@ -70,6 +74,7 @@ func (h *Handlers) RejectedMessages(w http.ResponseWriter, r *http.Request) {
 	respond.Success(w, msg)
 }
 
+// QueuedMessages communicates with the processor for retrieving the queued messages
 func (h *Handlers) QueuedMessages(w http.ResponseWriter, r *http.Request) {
 	msg, err := h.processor.GetMessages(model.Queued)
 	if err != nil {
@@ -81,6 +86,7 @@ func (h *Handlers) QueuedMessages(w http.ResponseWriter, r *http.Request) {
 	respond.Success(w, msg)
 }
 
+// Notify handler for receiving banned list updates
 func (h *Handlers) Notify(w http.ResponseWriter, r *http.Request) {
 	n, err := io.ReadAll(r.Body)
 	if err != nil {
@@ -88,7 +94,6 @@ func (h *Handlers) Notify(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Should check if the notification contains a Token, otherwise the request is not valid
 	notification, err := adapter.ConvertByteArrayToNotifyPayload(n)
 	if err != nil {
 		respond.Error(w, 400, "Failed to decode payload")
@@ -103,7 +108,9 @@ func (h *Handlers) Notify(w http.ResponseWriter, r *http.Request) {
 	logger.Info.Println("Received ", notification)
 
 	bw := model.NewBannedWords(notification.Words)
-	h.processor.UpdateBannedWords(bw)
+	if err = h.processor.UpdateBannedWords(bw); err != nil {
+		respond.Error(w, 401, "Failed to update banned words")
+	}
 
 	respond.Success(w, "Updated words")
 }

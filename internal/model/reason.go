@@ -1,5 +1,6 @@
 package model
 
+// Defines all the possible values for Reason key within a message
 const (
 	ManualValidationNeeded   = "ManualValidationNeeded"
 	TextValidationFailed     = "TextValidationFailed"

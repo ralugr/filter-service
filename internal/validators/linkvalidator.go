@@ -17,6 +17,10 @@ func NewLinkValidator() *LinkValidator {
 	return &LinkValidator{}
 }
 
+// Validate check if the message has valid links.
+// Case 1: At lest one link is external: Sets message state to Rejected
+// Case 2: All links are internal: Sets message state to Accepted
+// Case 3: The message does not contain any links: Sets message state to Approved
 func (lv *LinkValidator) Validate(message *model.Message) error {
 	logger.Info.Println("Entering link validator with message ", message)
 	if lv.hasExternalLink(message) {
@@ -42,12 +46,12 @@ func (lv *LinkValidator) hasExternalLink(message *model.Message) bool {
 		logger.Info.Printf("Checking link %v", matchedUrl)
 
 		// Parsing the matched url so that we can know if it's an external one or not
-		url, err := url.Parse(matchedUrl)
+		u, err := url.Parse(matchedUrl)
 
 		if err != nil {
 			logger.Warning.Printf("The URL %v could not be parsed %v", matchedUrl, err)
 		}
-		if url != nil && url.IsAbs() {
+		if u != nil && u.IsAbs() {
 			logger.Warning.Printf("The message %v has an external link %v", message, fullMatch)
 			return true
 		}

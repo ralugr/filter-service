@@ -19,8 +19,10 @@ import (
 type Service struct {
 	// Cfg holds user configurable arguments
 	Cfg *config.Config
+
 	//Handlers handlers for HTTP requests
 	Handlers *handlers.Handlers
+
 	// Processor processes messages
 	Processor *processor.Processor
 }
@@ -60,7 +62,7 @@ func New(configFile string) (*Service, error) {
 	return &Service{cfg, h, p}, nil
 }
 
-// Does a http GET to the language service to fetch the bad words list
+// Does a http GET to the language-service to fetch the bad words list
 func getBannedWords(cfg *config.Config) ([]string, error) {
 	var bannedWords []string
 	response, err := http.Get(cfg.BannedWordsUrl)
@@ -85,9 +87,9 @@ func getBannedWords(cfg *config.Config) ([]string, error) {
 	return bannedWords, nil
 }
 
-// Sends POST request to the language service in order to let the service know that we
+// Sends POST request to the language-service in order to let the service know that we
 // want to be notified when the bad word list is updated. We send the url we want to get
-// the notification on and a token. Request that are coming to our URL without the token
+// the notification on and a token. Requests that are coming to our URL without the token
 // are considered invalid.
 func subscribe(cfg *config.Config) error {
 	subscriber := model.Subscriber{
